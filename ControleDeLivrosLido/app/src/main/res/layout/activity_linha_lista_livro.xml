@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="411dp"
+        android:layout_height="110dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-1dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/linhaListaNomeCategoriaResposta"
+            android:layout_width="240dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="2dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/linhaListaNomeAutorResposta"
+            app:layout_constraintTop_toTopOf="@+id/linhaListaCategoria"
+            tools:text="@string/linhaListaNomeCategoriaResposta" />
+
+        <TextView
+            android:id="@+id/linhaListaNomeAutorResposta"
+            android:layout_width="260dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/linhaListaNomeAutorResposta"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/linhaListaNomeLivroResposta"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/linhaListaNomeAutor"
+            app:layout_constraintTop_toTopOf="@+id/linhaListaNomeAutor" />
+
+        <TextView
+            android:id="@+id/linhaListaNomeLivro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="10dp"
+            android:includeFontPadding="false"
+            android:text="@string/linhaListaNomeLivro"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/linhaListaNomeLivro" />
+
+        <TextView
+            android:id="@+id/linhaListaNomeAutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/linhaListaNomeAutor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/linhaListaNomeLivro"
+            app:layout_constraintTop_toBottomOf="@+id/linhaListaNomeLivro"
+            tools:text="@string/linhaListaNomeAutor" />
+
+        <TextView
+            android:id="@+id/linhaListaCategoria"
+            android:layout_width="73dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/linhaListaCategoria"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/linhaListaNomeAutor"
+            app:layout_constraintTop_toBottomOf="@+id/linhaListaNomeAutor" />
+
+        <TextView
+            android:id="@+id/linhaListaNomeLivroResposta"
+            android:layout_width="260dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="2dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/linhaListaNomeLivro"
+            app:layout_constraintTop_toTopOf="@+id/linhaListaNomeLivro"
+            tools:text="@string/linhaListaNomeLivroResposta" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

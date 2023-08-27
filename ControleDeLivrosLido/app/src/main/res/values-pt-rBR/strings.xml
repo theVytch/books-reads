@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Controle De Livros Lido</string>
+    <string name="nome">Titulo</string>
+    <string name="limpar">Limpar</string>
+    <string name="autor">Autor</string>
+    <string name="livroComAutor">Salvar</string>
+    <string name="erro_nomeLivro">Nome do livro não pode ser vazio</string>
+    <string name="erro_nomeAutor">Nome do autor não pode ser vazio</string>
+    <string name="erro_categoria">Categoria não pode ser vazio</string>
+    <string name="campos_limpos">Campos limpos</string>
+    <string name="livroLido">Ja leu esse livro?</string>
+    <string name="estudo">Estudo</string>
+    <string name="entretenimento">Entretenimento</string>
+    <string name="erro_radioGroup">Selecione o tipo de livro</string>
+    <string name="linhaListaNomeLivro">Titulo: </string>
+    <string name="linhaListaNomeAutor">Autor: </string>
+    <string name="linhaListaCategoria">Categoria: </string>
+    <string name="linhaListaNomeLivroResposta" />
+    <string name="linhaListaNomeAutorResposta" />
+    <string name="linhaListaNomeCategoriaResposta" />
+    <string name="moverParaTelaDeCadastro">Novo Livro</string>
+    <string name="title_activity_menu_livro">MenuLivro</string>
+    <string name="textViewNomePosGrad">Universidade Tecnológica Federal do Paraná</string>
+    <string name="textViewNomeDesenvolvedor">Nome: Eduardo Melentovytch da Silva</string>
+    <string name="infoSobreAplicativo">Este aplicativo foi desenvolvido como atividade da disciplina de Android do curso de pós-graduação em Tecnologia Java. O aplicativo irá armazenar informações sobre os livros que foram lidos pelo usuário, permitindo que ele salve detalhes sobre cada livro e faça algumas anotações.</string>
+    <string name="btnMudarParaTelaSobre">Sobre</string>
+    <string name="btnSalvarComentario">Salvar Comentario</string>
+    <string name="editTextComentario"></string>
+    <string name="necess_rio_preencher_todos_os_campos">É necessário preencher todos os campos</string>
+    <string name="textViewEmail">Email: eduardos.2022@alunos.utfpr.edu.br</string>
+    <string name="novoLivro">Novo livro</string>
+    <string name="sobreAplicativo">Sobre</string>
+    <string name="menuItemComentario">Adicionar comentario</string>
+    <string name="menuItemEditar">Editar</string>
+    <string name="menuItemExcluir">Excluir</string>
+    <string name="azul">Azul</string>
+    <string name="cinza">Cinza</string>
+    <string name="branco">Branco</string>
+    <string name="ordenarListaPorTitulo">Ordenar por Titulo</string>
+    <string name="ordenarListaPorAutor">Ordenar por Autor</string>
+
+    <string name="spinner_categoria">Categoria</string>
+    <string name="orderBy">Ordenar</string>
+    <string name="itemOrdenarLivroLidoTrue">Mostrar livros lido</string>
+    <string name="itemOrdenarLivroLidoFalse">Mostrar livros não lido</string>
+    <string name="editTextNomeLivro">Nome do livro</string>
+    <string name="editTextNomeAutor">Nome do autor</string>
+    <string name="editTextHintComentario">Digite seu comentario aqui...</string>
+    <string-array name="categoria">
+        <item>Antropologia</item>
+        <item>Arquitetura</item>
+        <item>Artes</item>
+        <item>Astrologia</item>
+        <item>Aventura</item>
+        <item>Auto-Desenvolvimento</item>
+        <item>Autoajuda</item>
+        <item>Autobiografia</item>
+        <item>Biografia</item>
+        <item>Biologia</item>
+        <item>Cinema</item>
+        <item>Comédia</item>
+        <item>Culinária</item>
+        <item>Cyberpunk</item>
+        <item>Ciência</item>
+        <item>Ciência Política</item>
+        <item>Ciência Ficção</item>
+        <item>Contos</item>
+        <item>Drama</item>
+        <item>Design</item>
+        <item>Distopia</item>
+        <item>Economia</item>
+        <item>Educação</item>
+        <item>Ensaios</item>
+        <item>Espiritualidade</item>
+        <item>Esportes</item>
+        <item>Fantasia</item>
+        <item>Ficção</item>
+        <item>Ficção Científica</item>
+        <item>Ficção Histórica</item>
+        <item>Filmes</item>
+        <item>Filosofia</item>
+        <item>Fotografia</item>
+        <item>Finanças</item>
+        <item>História</item>
+        <item>Horóscopos</item>
+        <item>Jornalismo</item>
+        <item>Literatura Clássica</item>
+        <item>Literatura Infantil</item>
+        <item>Literatura Juvenil</item>
+        <item>Magia</item>
+        <item>Marketing</item>
+        <item>Matemática</item>
+        <item>Meio Ambiente</item>
+        <item>Mistério e Suspense</item>
+        <item>Música</item>
+        <item>Moda</item>
+        <item>Pintura</item>
+        <item>Poesia</item>
+        <item>Psicologia</item>
+        <item>Paranormal</item>
+        <item>Pintura</item>
+        <item>Política</item>
+        <item>Química</item>
+        <item>Realismo Mágico</item>
+        <item>Religião e Espiritualidade</item>
+        <item>Romance</item>
+        <item>Saúde e Bem-Estar</item>
+        <item>Sociologia</item>
+        <item>Teatro</item>
+        <item>Tecnologia</item>
+        <item>Teologia</item>
+        <item>Viagem</item>
+        <item>Viagem no Tempo</item>
+        <item>Vampiros</item>
+        <item>Lobisomens</item>
+        <item>Literatura Clássica</item>
+        <item>Literatura Infantil</item>
+        <item>Literatura Juvenil</item>
+    </string-array>
+</resources>

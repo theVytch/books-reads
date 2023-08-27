@@ -1,0 +1,120 @@
+<resources>
+    <string name="app_name">Book Control Read</string>
+    <string name="nome">Title</string>
+    <string name="limpar">Clear</string>
+    <string name="autor">Author</string>
+    <string name="livroComAutor">Save</string>
+    <string name="erro_nomeLivro">Book name cannot be empty</string>
+    <string name="erro_nomeAutor">Author name cannot be empty</string>
+    <string name="erro_categoria">Category cannot be empty</string>
+    <string name="campos_limpos">Fields cleared</string>
+    <string name="livroLido">Have you read this book?</string>
+    <string name="estudo">Study</string>
+    <string name="entretenimento">Entertainment</string>
+    <string name="erro_radioGroup">Select the book type</string>
+    <string name="linhaListaNomeLivro">Title: </string>
+    <string name="linhaListaNomeAutor">Author: </string>
+    <string name="linhaListaCategoria">Category: </string>
+    <string name="linhaListaNomeLivroResposta" />
+    <string name="linhaListaNomeAutorResposta" />
+    <string name="linhaListaNomeCategoriaResposta" />
+    <string name="moverParaTelaDeCadastro">New Book</string>
+    <string name="title_activity_menu_livro">BookMenu</string>
+    <string name="textViewNomePosGrad">Universidade Tecnológica Federal do Paraná</string>
+    <string name="textViewNomeDesenvolvedor">Name: Eduardo Melentovytch da Silva</string>
+    <string name="infoSobreAplicativo">This app was developed as an activity for the Android course in the postgraduate program in Java Technology. The app will store information about books read by the user, allowing them to save details about each book and make some notes.</string>
+    <string name="btnMudarParaTelaSobre">About</string>
+    <string name="btnSalvarComentario">Save Comment</string>
+    <string name="editTextComentario"></string>
+    <string name="necess_rio_preencher_todos_os_campos">All fields must be filled</string>
+    <string name="textViewEmail">Email: eduardos.2022@alunos.utfpr.edu.br</string>
+    <string name="novoLivro">New book</string>
+    <string name="sobreAplicativo">About</string>
+    <string name="menuItemComentario">Add comment</string>
+    <string name="menuItemEditar">Edit</string>
+    <string name="menuItemExcluir">Delete</string>
+    <string name="azul">Blue</string>
+    <string name="cinza">Gray</string>
+    <string name="branco">White</string>
+    <string name="ordenarListaPorTitulo">Sort by Title</string>
+    <string name="ordenarListaPorAutor">Sort by Author</string>
+
+    <string name="spinner_categoria">Category</string>
+    <string name="orderBy">Order by</string>
+    <string name="itemOrdenarLivroLidoTrue">Show read books</string>
+    <string name="itemOrdenarLivroLidoFalse">Show unread books</string>
+    <string name="editTextNomeLivro">Book name</string>
+    <string name="editTextNomeAutor">Author name</string>
+    <string name="editTextHintComentario">Type your comment here...</string>
+    <string-array name="categoria">
+        <item>Anthropology</item>
+        <item>Architecture</item>
+        <item>Arts</item>
+        <item>Astrology</item>
+        <item>Adventure</item>
+        <item>Self-Development</item>
+        <item>Self-Help</item>
+        <item>Autobiography</item>
+        <item>Biography</item>
+        <item>Biology</item>
+        <item>Cinema</item>
+        <item>Comedy</item>
+        <item>Culinary</item>
+        <item>Cyberpunk</item>
+        <item>Science</item>
+        <item>Political Science</item>
+        <item>Science Fiction</item>
+        <item>Short Stories</item>
+        <item>Drama</item>
+        <item>Design</item>
+        <item>Dystopia</item>
+        <item>Economy</item>
+        <item>Education</item>
+        <item>Essays</item>
+        <item>Spirituality</item>
+        <item>Sports</item>
+        <item>Fantasy</item>
+        <item>Fiction</item>
+        <item>Science Fiction</item>
+        <item>Historical Fiction</item>
+        <item>Movies</item>
+        <item>Philosophy</item>
+        <item>Photography</item>
+        <item>Finances</item>
+        <item>History</item>
+        <item>Horoscopes</item>
+        <item>Journalism</item>
+        <item>Classical Literature</item>
+        <item>Children Literature</item>
+        <item>Young Adult Literature</item>
+        <item>Magic</item>
+        <item>Marketing</item>
+        <item>Mathematics</item>
+        <item>Environment</item>
+        <item>Mystery and Suspense</item>
+        <item>Music</item>
+        <item>Fashion</item>
+        <item>Painting</item>
+        <item>Poetry</item>
+        <item>Psychology</item>
+        <item>Paranormal</item>
+        <item>Painting</item>
+        <item>Politics</item>
+        <item>Chemistry</item>
+        <item>Magic Realism</item>
+        <item>Religion and Spirituality</item>
+        <item>Romance</item>
+        <item>Health and Well-being</item>
+        <item>Sociology</item>
+        <item>Theatre</item>
+        <item>Technology</item>
+        <item>Theology</item>
+        <item>Travel</item>
+        <item>Time Travel</item>
+        <item>Vampires</item>
+        <item>Werewolves</item>
+        <item>Classical Literature</item>
+        <item>Children Literature</item>
+        <item>Young Adult Literature</item>
+    </string-array>
+</resources>

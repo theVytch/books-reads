@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuItemNovoLivro"
+        android:title="@string/novoLivro" />
+    <item
+        android:id="@+id/menuItemSobreAplicativo"
+        android:title="@string/sobreAplicativo" />
+    <item
+        android:id="@+id/itemMenuOrdernar"
+        android:title="@string/orderBy">
+        <menu>
+            <group
+                android:id="@+id/groupOrdenarLista"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/itemOrdenarTitulo"
+                    android:title="@string/ordenarListaPorTitulo" />
+
+                <item
+                    android:id="@+id/itemOrdenarAutor"
+                    android:title="@string/ordenarListaPorAutor" />
+                <item
+                    android:id="@+id/itemOrdenarLivroLidoTrue"
+                    android:title="@string/itemOrdenarLivroLidoTrue" />
+                <item
+                    android:id="@+id/itemOrdenarLivroLidoFalse"
+                    android:title="@string/itemOrdenarLivroLidoFalse" />
+            </group>
+        </menu>
+    </item>
+</menu>

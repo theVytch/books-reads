@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutTelaSobre"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewTitulolivro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="@string/nome"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.08" />
+
+            <EditText
+                android:id="@+id/editTextNomeLivro"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/editTextNomeLivro"
+                android:inputType="text|textPersonName|textCapWords"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitulolivro" />
+
+            <TextView
+                android:id="@+id/textViewTituloAutor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:onClick="mostrarLivroComAutorCompleto"
+                android:text="@string/autor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNomeLivro" />
+
+            <EditText
+                android:id="@+id/editTextNomeAutor"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/editTextNomeAutor"
+                android:inputType="text|textPersonName|textCapWords"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTituloAutor" />
+
+            <CheckBox
+                android:id="@+id/checkBoxLivroLido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/livroLido"
+                app:layout_constraintStart_toStartOf="@+id/radioGroupTipoDeLivro"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupTipoDeLivro" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupTipoDeLivro"
+                android:layout_width="291dp"
+                android:layout_height="98dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/editTextNomeAutor"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNomeAutor">
+
+                <RadioButton
+                    android:id="@+id/radioButtonEstudo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estudo" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonEntretenimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/entretenimento" />
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/spinnerCategoria"
+                android:layout_width="322dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:addStatesFromChildren="false"
+                android:text="@string/spinner_categoria"
+                app:layout_constraintStart_toStartOf="@+id/checkBoxLivroLido"
+                app:layout_constraintTop_toBottomOf="@+id/checkBoxLivroLido" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
