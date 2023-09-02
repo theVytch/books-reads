@@ -1,5 +1,6 @@
 package br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades;
 
+
 import android.os.Build;
 
 import java.io.Serializable;
@@ -28,5 +29,9 @@ public class Comentario implements Serializable {
 
     public String getData() {
         return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

@@ -11,16 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.edu.utfpr.eduardomelentovytch.controledelivroslido.DAO.LivroDAO;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.R;
+import br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades.Comentario;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades.Livro;
+import br.edu.utfpr.eduardomelentovytch.controledelivroslido.persistencia.LivrosDatabase;
 
 public class TelaComentarioActivity extends AppCompatActivity {
 
     private EditText editTextComentario;
     private TextView txtData;
     private Livro livro;
-    private LivroDAO livroDAO;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,9 +66,11 @@ public class TelaComentarioActivity extends AppCompatActivity {
     }
 
     public void salvarComentario(View view){
-        livroDAO = new LivroDAO();
-        livroDAO.setComentarioNoLivro(livro, editTextComentario.getText().toString());
-        voltarParaTelaListaActivity(livro);
+        LivrosDatabase database = LivrosDatabase.getDatabase(this);
+        Livro livroAux = database.livroDao().queryForId(livro.getId());
+        livroAux.setComentario(new Comentario(editTextComentario.getText().toString()));
+        database.livroDao().update(livroAux);
+        voltarParaTelaListaActivity(livroAux);
     }
 
     public void voltarParaTelaListaActivity(Livro livro){

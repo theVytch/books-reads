@@ -1,95 +1,42 @@
 package br.edu.utfpr.eduardomelentovytch.controledelivroslido.DAO;
 
-import android.annotation.SuppressLint;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
-import br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades.Comentario;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades.Livro;
+@Dao
+public interface LivroDao {
 
-public class LivroDAO {
+    @Insert
+    Long insert(Livro livro);
 
-    private final static List<Livro> livrosDao = new ArrayList<>();
-    private static int contadorDeIds = 1;
-    public List<Livro> getAll(){
-        return new ArrayList<>(livrosDao);
-    }
+    @Delete
+    void delete(Livro livro);
 
-    @SuppressLint("NewApi")
-    public List<Livro> getAllOrderBy(String opcaoDeOrdenacao){
-        if(opcaoDeOrdenacao.equals("orderTitulo")) {
-            return new ArrayList<>(livrosDao).stream()
-                    .sorted(Comparator.comparing(Livro::getNomeLivro))
-                    .collect(Collectors.toList());
-        }
+    @Update
+    void update(Livro livro);
 
-        if(opcaoDeOrdenacao.equals("orderAutor")) {
-            return new ArrayList<>(livrosDao).stream()
-                    .sorted(Comparator.comparing(Livro::getNomeAutor))
-                    .collect(Collectors.toList());
-        }
+    @Query("SELECT * FROM livro WHERE id = :id")
+    Livro queryForId(Long id);
 
-        if(opcaoDeOrdenacao.equals("orderLidoTrue")) {
-            return new ArrayList<>(livrosDao).stream()
-                    .filter(livro -> livro.getLivroJaFoiLido())
-                    .collect(Collectors.toList());
-        }
+    @Query("SELECT * FROM livro ORDER BY id ASC")
+    List<Livro> queryAll();
 
-        if(opcaoDeOrdenacao.equals("orderLidoFalse")) {
-            return new ArrayList<>(livrosDao).stream()
-                    .filter(livro -> !livro.getLivroJaFoiLido())
-                    .collect(Collectors.toList());
-        }
+    @Query("SELECT * FROM livro ORDER BY nomeLivro ASC")
+    List<Livro> queryAllOrderByTituloLivro();
 
-        return getAll();
-    }
+    @Query("SELECT * FROM livro ORDER BY nomeAutor ASC")
+    List<Livro> queryAllOrderByNomeAutor();
 
-    public Livro getLivroPelaPosicao(int posicao){
-        return getAll().get(posicao);
-    }
+    @Query("SELECT * FROM livro WHERE livroJaFoiLido = 1")
+    List<Livro> queryAllLivroJaFoiLidoTrue();
 
-    public void add(Livro livro){
-        livro.setId(contadorDeIds);
-        livrosDao.add(livro);
-        atualizaIds();
-    }
-
-    public void removePorPosicao(int posicao) {
-        livrosDao.remove(posicao);
-    }
-
-    public void setComentarioNoLivro(Livro livro, String comentario){
-        for (Livro lv: getAll()) {
-            if(livro.getId() == lv.getId()){
-                lv.setComentario(new Comentario(comentario));
-            }
-        }
-    }
-
-    public void setLivroAtualizado(Livro livroEditado){
-        for (Livro livroVelho: getAll()) {
-            if(livroEditado.getId() == livroVelho.getId()){
-                atualizaLivro(livroVelho, livroEditado);
-            }
-        }
-    }
-
-    public void atualizaLivro(Livro livroVelho, Livro livroEditado){
-        livroVelho.setId(livroEditado.getId());
-        livroVelho.setNomeLivro(livroEditado.getNomeLivro());
-        livroVelho.setNomeAutor(livroEditado.getNomeAutor());
-        livroVelho.setTipoDeLivro(livroEditado.getTipoDeLivro());
-        livroVelho.setLivroJaFoiLido(livroEditado.getLivroJaFoiLido());
-        livroVelho.setCategoriaLivro(livroEditado.getCategoriaLivro());
-        if (livroVelho.getComentario() != null){
-            livroVelho.setComentario(livroEditado.getComentario());
-        }
-    }
-
-    private void atualizaIds() {
-        contadorDeIds++;
-    }
+    @Query("SELECT * FROM livro WHERE livroJaFoiLido = 0")
+    List<Livro> queryAllLivroJaFoiLidoFalse();
 }

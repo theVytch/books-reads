@@ -1,7 +1,5 @@
 package br.edu.utfpr.eduardomelentovytch.controledelivroslido.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,12 +13,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import br.edu.utfpr.eduardomelentovytch.controledelivroslido.DAO.LivroDAO;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.R;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades.Livro;
+import br.edu.utfpr.eduardomelentovytch.controledelivroslido.persistencia.LivrosDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> lista;
     private Integer tipo = 0;
     private Integer numeroRadioButon = 1;
-    private LivroDAO livroDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void edicaoDoLivro(Livro livro) {
         if(livro != null){
-            if(editarLivro(livro) == numeroRadioButon){
+            if(editarLivro(livro).equals(numeroRadioButon)){
                radioButtonEstudo.setChecked(true);
             }else{
                 radioButtonEntretenimento.setChecked(true);
@@ -131,23 +130,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(livroEditado == null){
-            intent.putExtra("livro", livroCriado);
             startActivity(intent);
         }else{
-            intent.putExtra("livro", livroCriado);
             startActivity(intent);
         }
     }
 
     public Integer editarLivro(Livro livro){
-        Integer i;
         editTextNomeLivro.setText(livro.getNomeLivro());
         editTextNomeAutor.setText(livro.getNomeAutor());
-        cbLivroLido.setChecked(livro.getLivroJaFoiLido());
 
-        for(i = 0; i < lista.size(); i++){
-            if(lista.get(i).toString().equals(livro.getCategoriaLivro())){
-                ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinnerCategoria.getAdapter();
+        if(livro.getLivroJaFoiLido() == 1) {
+            cbLivroLido.setChecked(true);
+        }else{
+            cbLivroLido.setChecked(false);
+        }
+
+        for(int i = 0; i < lista.size(); i++){
+            if(lista.get(i).equals(livro.getCategoriaLivro())){
                 spinnerCategoria.setSelection(i);
             }
         }
@@ -165,31 +165,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public Boolean validacao() {
-        Boolean valido;
+        //Boolean valido;
         String nomeLivro = editTextNomeLivro.getText().toString();
         String nomeAutor = editTextNomeAutor.getText().toString();
         String tipoDeLivro = "";
-        Boolean livroLido;
+        int livroLido;
         String categoria = "";
 
-        if (nomeLivro == null || nomeLivro.trim().isEmpty()) {
+        if (nomeLivro.trim().isEmpty()) {
             Toast.makeText(this, R.string.erro_nomeLivro, Toast.LENGTH_LONG).show();
             editTextNomeLivro.requestFocus();
-            valido = false;
-            return valido;
+            //valido = false;
+            return false;
         }
 
-        if (nomeAutor == null || nomeAutor.trim().isEmpty()) {
+        if (nomeAutor.trim().isEmpty()) {
             Toast.makeText(this, R.string.erro_nomeAutor, Toast.LENGTH_SHORT).show();
             editTextNomeAutor.requestFocus();
-            valido = false;
-            return valido;
+            //valido = false;
+            return false;
         }
 
         if (cbLivroLido.isChecked()) {
-            livroLido = true;
+            livroLido = 1;
         } else {
-            livroLido = false;
+            livroLido = 0;
         }
 
         int checkedRadioButtonId = radioGroupTipoDeLivroEscolhido.getCheckedRadioButtonId();
@@ -199,17 +199,19 @@ public class MainActivity extends AppCompatActivity {
             tipoDeLivro = getString(R.string.entretenimento);
         } else {
             Toast.makeText(this, R.string.erro_radioGroup, Toast.LENGTH_SHORT).show();
-            valido = false;
-            return valido;
+            //valido = false;
+            return false;
         }
 
         categoria = (String) spinnerCategoria.getSelectedItem();
 
         if (categoria == null) {
             Toast.makeText(this, R.string.erro_categoria, Toast.LENGTH_SHORT).show();
-            valido = false;
-            return valido;
+            //valido = false;
+            return false;
         }
+
+        LivrosDatabase database = LivrosDatabase.getDatabase(this);
 
         if(livroEditado != null){
             livroCriado = new Livro();
@@ -222,10 +224,10 @@ public class MainActivity extends AppCompatActivity {
             if(livroEditado.getComentario() != null){
                 livroCriado.setComentario(livroEditado.getComentario());
             }
-            livroDAO = new LivroDAO();
-            livroDAO.setLivroAtualizado(livroCriado);
+            database.livroDao().update(livroCriado);
         }else {
             livroCriado = new Livro(nomeLivro, nomeAutor, tipoDeLivro, livroLido, categoria);
+            database.livroDao().insert(livroCriado);
         }
         return true;
     }

@@ -63,6 +63,7 @@ public class LivroAdapter extends BaseAdapter {
             holder = (LivroHolder) convertView.getTag();
         }
 
+        //convertView.setBackgroundColor(Color.parseColor("#D76C6C"));
         holder.textViewValorNomeLivro.setText(livros.get(position).getNomeLivro());
         holder.textViewValorNomeAutor.setText(livros.get(position).getNomeAutor());
         holder.textViewValorCategoria.setText(livros.get(position).getCategoriaLivro());

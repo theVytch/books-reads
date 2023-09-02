@@ -1,20 +1,32 @@
 package br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades;
 
+
+import androidx.annotation.NonNull;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
-public class Livro implements Serializable {
-
-    private int id;
+@Entity
+public class Livro implements Serializable{
+    @PrimaryKey(autoGenerate = true)
+    private Long id;
+    @NonNull
     private String nomeLivro;
+    @NonNull
     private String nomeAutor;
+    @NonNull
     private String tipoDeLivro;
-    private Boolean livroJaFoiLido;
+    private Integer livroJaFoiLido;
     private String categoriaLivro;
+    @Embedded
     private Comentario comentario;
 
-    public Livro(){}
+    public Livro() {
+    }
 
-    public Livro(String nomeLivro, String nomeAutor, String tipoDeLivro, Boolean livroJaFoiLido, String categoriaLivro) {
+    public Livro(String nomeLivro, String nomeAutor, String tipoDeLivro, Integer livroJaFoiLido, String categoriaLivro) {
         this.nomeLivro = nomeLivro;
         this.nomeAutor = nomeAutor;
         this.tipoDeLivro = tipoDeLivro;
@@ -22,11 +34,11 @@ public class Livro implements Serializable {
         this.categoriaLivro = categoriaLivro;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -54,11 +66,11 @@ public class Livro implements Serializable {
         this.tipoDeLivro = tipoDeLivro;
     }
 
-    public Boolean getLivroJaFoiLido() {
+    public Integer getLivroJaFoiLido() {
         return livroJaFoiLido;
     }
 
-    public void setLivroJaFoiLido(Boolean livroJaFoiLido) {
+    public void setLivroJaFoiLido(Integer livroJaFoiLido) {
         this.livroJaFoiLido = livroJaFoiLido;
     }
 
@@ -76,11 +88,5 @@ public class Livro implements Serializable {
 
     public void setComentario(Comentario comentario) {
         this.comentario = comentario;
-    }
-
-    @Override
-    public String toString() {
-        return "nomeLivro: " + nomeLivro + '\n' +
-                "categoriaLivro: " + categoriaLivro;
     }
 }

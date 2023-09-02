@@ -14,36 +14,32 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.edu.utfpr.eduardomelentovytch.controledelivroslido.DAO.LivroDAO;
-import br.edu.utfpr.eduardomelentovytch.controledelivroslido.adapter.LivroAdapter;
+import java.util.ArrayList;
+import java.util.List;
+
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.R;
+import br.edu.utfpr.eduardomelentovytch.controledelivroslido.adapter.LivroAdapter;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades.Livro;
+import br.edu.utfpr.eduardomelentovytch.controledelivroslido.persistencia.LivrosDatabase;
 
 public class ListaActivity extends AppCompatActivity {
 
     private static final String ARQUIVO =
             "br.edu.utfpr.eduardomelentovytch.controledelivroslido.PREFERENCIA_ORDENACAO";
-
     private static final String ORDENACAO = "ORDENACAO";
-
     private String opcao = "orderId";
-
     private ListView listViewLivros;
-    private LivroDAO livroDAO;
     private LivroAdapter livroAdapter;
+    private List<Livro> lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
 
-        livroDAO = new LivroDAO();
         inicializaComponentes();
 
-        Intent intent = getIntent();
-        Livro livro = (Livro) intent.getSerializableExtra("livro");
-
-        adicionaOuAtualizaLista(livro);
+        adicionaOuAtualizaLista();
         registerForContextMenu(listViewLivros);
 
         lerPreferenciaOrdenacao();
@@ -70,7 +66,7 @@ public class ListaActivity extends AppCompatActivity {
             salvarPreferencia("orderLidoTrue");
         } else if (id == R.id.itemOrdenarLivroLidoFalse) {
             salvarPreferencia("orderLidoFalse");
-        }else {
+        } else {
             return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
@@ -93,7 +89,7 @@ public class ListaActivity extends AppCompatActivity {
             mudarParaTelaDeCadastroParaEditar(info.position);
         } else if (id == R.id.menuItemExcluir) {
             excluir(info.position);
-        }else {
+        } else {
             return super.onContextItemSelected(item);
         }
         return super.onContextItemSelected(item);
@@ -101,19 +97,19 @@ public class ListaActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem item;
-        if(opcao.equals("orderTitulo")){
-            menu.findItem(R.id.itemOrdenarTitulo).setChecked(true);
-            return true;
-        }else if(opcao.equals("orderAutor")){
-            menu.findItem(R.id.itemOrdenarAutor).setChecked(true);
-            return true;
-        }else if (opcao.equals("orderLidoTrue")) {
-            menu.findItem(R.id.itemOrdenarLivroLidoTrue).setChecked(true);
-            return true;
-        } else if (opcao.equals("orderLidoFalse")) {
-            menu.findItem(R.id.itemOrdenarLivroLidoFalse).setChecked(true);
-            return true;
+        switch (opcao) {
+            case "orderTitulo":
+                menu.findItem(R.id.itemOrdenarTitulo).setChecked(true);
+                return true;
+            case "orderAutor":
+                menu.findItem(R.id.itemOrdenarAutor).setChecked(true);
+                return true;
+            case "orderLidoTrue":
+                menu.findItem(R.id.itemOrdenarLivroLidoTrue).setChecked(true);
+                return true;
+            case "orderLidoFalse":
+                menu.findItem(R.id.itemOrdenarLivroLidoFalse).setChecked(true);
+                return true;
         }
         return true;
     }
@@ -123,14 +119,14 @@ public class ListaActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    private void lerPreferenciaOrdenacao(){
+    private void lerPreferenciaOrdenacao() {
         SharedPreferences shared = getSharedPreferences(ARQUIVO, Context.MODE_PRIVATE);
         opcao = shared.getString(ORDENACAO, opcao);
 
         mudarOrdenacao();
     }
 
-    private void salvarPreferencia(String novaOpcao){
+    private void salvarPreferencia(String novaOpcao) {
         SharedPreferences shared = getSharedPreferences(ARQUIVO, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = shared.edit();
         editor.putString(ORDENACAO, novaOpcao);
@@ -139,27 +135,20 @@ public class ListaActivity extends AppCompatActivity {
         mudarOrdenacao();
     }
 
-    private void mudarOrdenacao(){
-        atualizarLista(opcao);
+    private void mudarOrdenacao() {
+        atualizarLista();
     }
 
     private void inicializaComponentes() {
         listViewLivros = findViewById(R.id.listViewLivros);
     }
 
-    private void adicionaOuAtualizaLista(Livro livro) {
-        if (!livroDAO.getAll().isEmpty()) {
-            if (buscaLivroPorId(livro.getId())) {
-                atualizarLista(opcao);
-                return;
-            } else {
-                adicionaLivroNaLista(livro);
-                return;
-            }
+    private void adicionaOuAtualizaLista() {
+        LivrosDatabase database = LivrosDatabase.getDatabase(this);
+        lista = database.livroDao().queryAll();
+        if (!lista.isEmpty()) {
+            atualizarLista();
         }
-       if (livro != null) {
-            popularLista(livro);
-       }
     }
 
     public void mudarParaTelaDeCadastro() {
@@ -167,9 +156,11 @@ public class ListaActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void mudarParaTelaDeCadastroParaEditar(int posicao){
+    public void mudarParaTelaDeCadastroParaEditar(int posicao) {
+        LivrosDatabase database = LivrosDatabase.getDatabase(this);
+        atualizarLista();
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("livro_para_editar", livroDAO.getLivroPelaPosicao(posicao));
+        intent.putExtra("livro_para_editar", lista.get(posicao));
         startActivity(intent);
     }
 
@@ -180,43 +171,45 @@ public class ListaActivity extends AppCompatActivity {
 
     public void mudarParaTelaComentario(int posicao) {
         Intent intent = new Intent(this, TelaComentarioActivity.class);
-        intent.putExtra("objeto_clicado", livroDAO.getLivroPelaPosicao(posicao));
+        atualizarLista();
+        if (!lista.isEmpty()) {
+            intent.putExtra("objeto_clicado", lista.get(posicao));
+        }
         startActivity(intent);
     }
 
     public void excluir(int posicao) {
-        livroDAO.removePorPosicao(posicao);
-        atualizarLista(opcao);
-    }
-
-    private void popularLista(Livro livro) {
-        adicionaLivroNaLista(livro);
+        LivrosDatabase database = LivrosDatabase.getDatabase(this);
+        atualizarLista();
+        database.livroDao().delete(lista.get(posicao));
+        atualizarLista();
     }
 
     private void adicionaLivroNaLista(Livro livro) {
-        livroDAO.add(livro);
-        atualizarLista(opcao);
+        atualizarLista();
     }
 
-    public boolean buscaLivroPorId(int id) {
-        boolean encontrou = false;
-        for (Livro livro : livroDAO.getAll()) {
-            if (livro.getId() == id) {
-                encontrou = true;
-            }
-        }
-        return encontrou;
+    public void atualizarLista() {
+        lista = retornaListaOrdenada(opcao);
+        livroAdapter = new LivroAdapter(this, lista);
+        livroAdapter.notifyDataSetChanged();
+        listViewLivros.setAdapter(livroAdapter);
     }
 
-    public void atualizarLista(String opcaoOrd) {
-        if(opcaoOrd.equals("orderId")) {
-            livroAdapter = new LivroAdapter(this, livroDAO.getAll());
-            livroAdapter.notifyDataSetChanged();
-            listViewLivros.setAdapter(livroAdapter);
-        }else{
-            livroAdapter = new LivroAdapter(this, livroDAO.getAllOrderBy(opcaoOrd));
-            livroAdapter.notifyDataSetChanged();
-            listViewLivros.setAdapter(livroAdapter);
+    public List<Livro> retornaListaOrdenada(String ordenacao) {
+        LivrosDatabase database = LivrosDatabase.getDatabase(this);
+        List<Livro> listaOrdenada = new ArrayList<>();
+        if (ordenacao.equals("orderTitulo")) {
+            listaOrdenada = database.livroDao().queryAllOrderByTituloLivro();
+        } else if (ordenacao.equals("orderAutor")) {
+            listaOrdenada = database.livroDao().queryAllOrderByNomeAutor();
+        } else if (ordenacao.equals("orderLidoTrue")) {
+            listaOrdenada = database.livroDao().queryAllLivroJaFoiLidoTrue();
+        } else if (ordenacao.equals("orderLidoFalse")) {
+            listaOrdenada = database.livroDao().queryAllLivroJaFoiLidoFalse();
+        } else {
+            listaOrdenada = database.livroDao().queryAll();
         }
+        return listaOrdenada;
     }
 }
