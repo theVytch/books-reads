@@ -1,6 +1,7 @@
 package br.edu.utfpr.eduardomelentovytch.controledelivroslido.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import br.edu.utfpr.eduardomelentovytch.controledelivroslido.R;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.adapter.LivroAdapter;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.entidades.Livro;
 import br.edu.utfpr.eduardomelentovytch.controledelivroslido.persistencia.LivrosDatabase;
+import br.edu.utfpr.eduardomelentovytch.controledelivroslido.utils.UtilsGUI;
 
 public class ListaActivity extends AppCompatActivity {
 
@@ -179,10 +181,20 @@ public class ListaActivity extends AppCompatActivity {
     }
 
     public void excluir(int posicao) {
-        LivrosDatabase database = LivrosDatabase.getDatabase(this);
-        atualizarLista();
-        database.livroDao().delete(lista.get(posicao));
-        atualizarLista();
+        String mensagem = getResources().getString(R.string.mensagemAvisoApagar) + "\n" + lista.get(posicao).getNomeLivro();
+        DialogInterface.OnClickListener listener = (dialog, which) -> {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    LivrosDatabase database = LivrosDatabase.getDatabase(this);
+                    atualizarLista();
+                    database.livroDao().delete(lista.get(posicao));
+                    atualizarLista();
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        };
+        UtilsGUI.confirmacao(this, mensagem, listener);
     }
 
     private void adicionaLivroNaLista(Livro livro) {

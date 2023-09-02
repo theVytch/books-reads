@@ -118,4 +118,8 @@
         <item>Literatura Infantil</item>
         <item>Literatura Juvenil</item>
     </string-array>
+    <string name="confirmacao">Confirmação</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="mensagemAvisoApagar">Deseja realmente apagar?</string>
 </resources>

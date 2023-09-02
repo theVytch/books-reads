@@ -46,6 +46,10 @@
     <string name="editTextNomeLivro">Book name</string>
     <string name="editTextNomeAutor">Author name</string>
     <string name="editTextHintComentario">Type your comment here...</string>
+    <string name="confirmacao">Confirmation</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+    <string name="mensagemAvisoApagar">Do you really want to delete?</string>
     <string-array name="categoria">
         <item>Anthropology</item>
         <item>Architecture</item>
